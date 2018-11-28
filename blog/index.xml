@@ -22,14 +22,5 @@ For a function to be a distance function, it has to satisfy the following proper
  Non-negativity : $d(x, y) \geq 0$ Identity : $d(x, y) = 0 \iff x=y$ Symmetry : $d(x, y) = d(y, x)$ Triangle Inequality : $d(x, z) \leq d(x, y) + d(y, z)$  With that out of the way, lets take a look at some of the common distances</description>
     </item>
     
-    <item>
-      <title>My First Post</title>
-      <link>/blog/my-first-post/</link>
-      <pubDate>Mon, 25 Jun 2018 23:13:18 -0700</pubDate>
-      
-      <guid>/blog/my-first-post/</guid>
-      <description> Hello there! </description>
-    </item>
-    
   </channel>
 </rss>

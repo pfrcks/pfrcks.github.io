@@ -23,15 +23,6 @@ For a function to be a distance function, it has to satisfy the following proper
     </item>
     
     <item>
-      <title>My First Post</title>
-      <link>/blog/my-first-post/</link>
-      <pubDate>Mon, 25 Jun 2018 23:13:18 -0700</pubDate>
-      
-      <guid>/blog/my-first-post/</guid>
-      <description> Hello there! </description>
-    </item>
-    
-    <item>
       <title>About me</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
