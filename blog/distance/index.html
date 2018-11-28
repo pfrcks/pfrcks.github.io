@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distance Metrics and Machine Learning | lost in compilation</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/blog/">Blog</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Distance Metrics and Machine Learning</span></h1>
+
+<h2 class="date">2018/11/28</h2>
+</div>
+
+<main>
+
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>A distance function(also referred as a metric) in mathematics refers to the function that defines a distance between any two points of a set. The most prevalent example is the Euclidean distance. But let&rsquo;s first define what makes a function a distance function.</p>
+
+<p>For a function to be a distance function, it has to satisfy the following properties:</p>
+
+<ul>
+<li>Non-negativity : <code>$d(x, y) \geq 0$</code></li>
+<li>Identity       : <code>$d(x, y) = 0 \iff x=y$</code></li>
+<li>Symmetry       : <code>$d(x, y) = d(y, x)$</code></li>
+<li>Triangle Inequality : <code>$d(x, z) \leq d(x, y) + d(y, z)$</code></li>
+</ul>
+
+<p>With that out of the way, lets take a look at some of the common distances</p>
+
+<h3 id="l-p-distances"><code>$L_p$</code> distances</h3>
+
+<p>For two vectors <code>$a, b$</code> in <code>$\mathbb{R}^d$</code>, the <code>$L_p$</code> distances are defined as <code>$d_p(a, b) = ||a-b||_p = \left(\sum_{i=1}^d\left(|a_i - b_i|\right)^p\right)^\frac{1}{p}$</code></p>
+
+<ul>
+<li><p>L=2 : This is the most common case. For L = 2, this transforms to Euclidean distance, which is used extensively both in Machine Learning and in sciences:
+<code>$d_2(a, b) = ||a-b||_2 = \left(\sum_{i=1}^d\left(|a_i - b_i|\right)^2\right)^\frac{1}{2}$</code></p></li>
+
+<li><p>L=1 : This is referred to as <strong>Manhattan Distance</strong>, called so because to walk in Manhattan you cannot cut through streets:
+<code>$d_1(a, b) = ||a-b||_1 = \sum_{i=1}^d\left(|a_i - b_i|\right)$</code></p></li>
+
+<li><p>L = 0 : Referred to as <strong>Hamming Distance</strong> which essentially checks for equality between the points:
+<code>$d_0(a, b) = ||a-b||_0 = \sum_{i=i}^d\mathbb{1}\left(a=b\right)$</code></p></li>
+
+<li><p>L = inf : Returns only the largest magnitude in the vector:
+<code>$d_\infty(a, b) = ||a-b||_\infty = \max_{i=1}^d|a_i - b_i|$</code></p></li>
+</ul>
+
+<h3 id="jaccard-distance">Jaccard Distance</h3>
+
+<p>Jaccard distance measures how similar two sets are. The Jaccard distance for two sets A and B is defined as</p>
+
+<p><code>$$d_J(A, B) = 1 - JS(A, B)=1 - \frac{|A \cap B|}{|A \cup B|}$$</code></p>
+
+<h3 id="cosine-distance">Cosine Distance</h3>
+
+<p>Measures the cosine of the angle between two d-dimensional vectors in <code>$\mathbb{R}^d$</code>
+<code>$$d_{cos}(A, B) = 1 - \frac{\sum_{i=1}^d a_ib_i}{||a|| ||b||}$$</code></p>
+
+<h3 id="edit-distance">Edit Distance</h3>
+
+<p>Edit distance is the number of delete or insert operations needed to convert a string A to a string B.</p>
+
+<hr />
+
+<p>This was a brief refresher over what was covered in class. Let&rsquo;s talk about another interesting kind of <strong>distance</strong></p>
+
+<h2 id="kullback-leibler-divergence">Kullback–Leibler divergence</h2>
+
+<p>To call KL divergence a distance is like calling tomato a vegetable. KL divergence is used to measure the difference between two probability distributions over the same random variable x.</p>
+
+<p><code>$$D_{KL}(p(x)||q(x)) = \sum_{x \in X} p(x) \ln \frac{p(x)}{q(x)}$$</code></p>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  <hr/>
+  &copy; <a href="https://linkedin.com/in/aagrawal92">Amol Agrawal</a> 2017 &ndash; 2018 | <a href="https://github.com/pfrcks">Github</a> | <a href="https://twitter.com/pfrcks">Twitter</a> | <a href="/index.xml">Subscribe</a>
+  
+  </footer>
+  </body>
+</html>
+
