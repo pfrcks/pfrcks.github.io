@@ -19,7 +19,7 @@
       <guid>/blog/distance/</guid>
       <description>Getting Started A distance function(also referred as a metric) in mathematics refers to the function that defines a distance between any two points of a set. The most prevalent example is the Euclidean distance. But let&amp;rsquo;s first define what makes a function a distance function.
 For a function to be a distance function, it has to satisfy the following properties:
- Non-negativity : $d(x, y) \geq 0$ Identity : $d(x, y) = 0 \iff x=y$ Symmetry : $d(x, y) = d(y, x)$ Triangle Inequality : $d(x, z) \leq d(x, y) + d(y, z)$  With that out of the way, lets take a look at some of the common distances</description>
+ Non-negativity : $d(x, y) \geq 0$ Identity : $d(x, y) = 0 \iff x=y$ Symmetry : $d(x, y) = d(y, x)$ Triangle Inequality : $d(x, z) \leq d(x, y) + d(y, z)$  Some of the distance functions which we went over in class were $L_p$ distances, Jaccard Distance, Cosine Distance and Edit distance.</description>
     </item>
     
     <item>
