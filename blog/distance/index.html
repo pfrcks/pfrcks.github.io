@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Distance Metrics and Machine Learning | lost in compilation</title>
+    <title>Distance Metrics and Beyond | lost in compilation</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     
@@ -26,7 +26,7 @@
     </nav>
 
 <div class="article-meta">
-<h1><span class="title">Distance Metrics and Machine Learning</span></h1>
+<h1><span class="title">Distance Metrics and Beyond</span></h1>
 
 <h2 class="date">2018/11/28</h2>
 </div>
@@ -60,6 +60,20 @@
 <p>Even though it looks like KL divergence measures <strong>distance</strong> between two probability distributions, it is not a distance measure. KL divergence is neither symmetric not does it satisfy the triangle inequality. It is however non-negative.</p>
 
 <p>If it is not a distance metric, then how is it used? In the formula presented above, the true distribution is often intractable. Therefore by minimizing the KL divergence by using tractable approximated distributions we can get an approximate distribution from which samples can be drawn.</p>
+
+<h2 id="distance-metrics-in-the-wild">Distance metrics in the wild</h2>
+
+<p>As expected Euclidean distance is perhaps the most used distance metric. We commonly utilize it for ML algorithms like KNN, K-Means, etc. Cosine distance is another heavily utilized metric used prominently in calculating similarity in NLP based tasks. But how does the choice of distance metric effect the model?</p>
+
+<h2 id="curse-of-dimensionality">Curse of Dimensionality</h2>
+
+<p>A typical supervised machine learning problem involves examples which are essentially vectors in a high dimensional feature space. A feature vector <code>$x=&lt;x_1, x_2, x_3, ..., x_d&gt;$</code>, can be said to be belonging to the space <code>$\mathbb{R}^D$</code></p>
+
+<p>Recall the concepts underlying K-Nearest Neighbors. We utilize the labels of the K neares points to make prediction about the label of the point under consideration. This is done because of our inductive bias that if a point lies in a space, then it is similar to other points which are in vicinity to it. Each dimension of the feature vector is taken into consdiration when the concept of <strong>nearest</strong> is being applied. However this introduces a couple of problems. Since KNN is giving importance to all features equally, in a dataset containing only a select relevant features KNN can perform poorly.</p>
+
+<p>Another problem which arises is of feature scaling. Let&rsquo;s assume that the distance metric for KNN is Euclidean distance. In such a case different scales amongst the dimensions of the feature vector can result in some dimensions being completely ignored. However, this has an easy fix. We can scale the dimensions to zero mean and unit variance and get rid of this issue.</p>
+
+<p>However, the problem becomes much more severe when the number of dimensions start increasing.</p>
 
 </main>
 
