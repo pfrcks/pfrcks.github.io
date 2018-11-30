@@ -62,8 +62,13 @@
 
 <p>If it is not a distance metric, then how is it used? In the formula presented above, the true distribution is often intractable. Therefore by minimizing the KL divergence by using tractable approximated distributions we can get an approximate distribution from which samples can be drawn.</p>
 
-<p>As a toy example let&rsquo;s take a 6 sided weighted die such that the true probabilities are given by <code>$p=[0.1, 0.2, 0.2, 0.1, 0.25, 0.15]$</code>. If we try to model it using a uniform distribution, our <code>$q$</code> becomes <code>$[0.166, 0.166, 0.166, 0.166, 0.166, 0.166]$</code>
-<img src="https://raw.githubusercontent.com/pfrcks/myblog/master/images/kl.png" alt="Image" /></p>
+<p>As a toy example let&rsquo;s take a 6 sided weighted dice such that the true probabilities are given by <code>$$p=[0.1, 0.2, 0.2, 0.1, 0.25, 0.15]$$</code>. If we try to model it using a uniform distribution, our <code>$q$</code> becomes <code>$$q=[0.166, 0.166, 0.166, 0.166, 0.166, 0.166]$$</code>.</p>
+
+<p>The figure below shows the barplot for the same</p>
+
+<p>![Image](<a href="https://raw.githubusercontent.com/pfrcks/myblog/master/images/kl.png">https://raw.githubusercontent.com/pfrcks/myblog/master/images/kl.png</a></p>
+
+<p>We can write a simple code snippet which can help us calculate the KL divergence between two distributions.(Disclaimer: For a much robust implementation refer to the scipy package)</p>
 
 <pre><code class="language-python">import numpy as np
 
@@ -73,6 +78,16 @@ def kl_div(p, q):
 
     return np.sum(np.where(p!=0, p*np.log(p/q), 0))
 </code></pre>
+
+<p>Using our toy example,</p>
+
+<pre><code class="language-python">&gt;&gt;print(kl_div(p, q))
+0.0603337190402897
+&gt;&gt;print(kl_div(q, p))
+0.055253998576011196
+</code></pre>
+
+<p>This non symmetric nature of KL divergence as discussed above is one of the reasons it is not a distance metric.</p>
 
 <h2 id="distance-metrics-in-the-wild">Distance metrics in the wild</h2>
 
