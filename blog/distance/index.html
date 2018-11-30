@@ -48,9 +48,9 @@
 <li>Triangle Inequality : <code>$d(x, z) \leq d(x, y) + d(y, z)$</code></li>
 </ul>
 
-<p>Some of the distance functions which we went over in class were <code>$L_p$</code> distances, Jaccard Distance, Cosine Distance and Edit distance. {TODO: refer class notes}. Now let&rsquo;s take a look at another kind of <em>distance</em></p>
+<p>Some of the distance functions which we went over in class were <code>$L_p$</code> distances, Jaccard Distance, Cosine Distance and Edit distance. {TODO: refer class notes}. Now let&rsquo;s take a look at one another kind of <em>distance</em> and then let&rsquo;s take a look at what happens to distances in high dimensional spaces.</p>
 
-<h2 id="kullback-leibler-divergence">Kullback–Leibler divergence</h2>
+<h2 id="i-kullback-leibler-divergence">I: Kullback–Leibler divergence</h2>
 
 <p>To call KL divergence a distance is like calling tomato a vegetable. KL divergence is used to measure the difference between two probability distributions over the same random variable x.</p>
 
@@ -62,9 +62,35 @@
 
 <p>If it is not a distance metric, then how is it used? In the formula presented above, the true distribution is often intractable. Therefore by minimizing the KL divergence by using tractable approximated distributions we can get an approximate distribution from which samples can be drawn.</p>
 
-<p>As a toy example let&rsquo;s take a 6 sided weighted dice such that the true probabilities are given by <code>$$p=[0.1, 0.2, 0.2, 0.1, 0.25, 0.15]$$</code>. If we try to model it using a uniform distribution, our <code>$q$</code> becomes <code>$$q=[0.166, 0.166, 0.166, 0.166, 0.166, 0.166]$$</code>.</p>
+<p>Here&rsquo;s another interesting property. <strong>Maximum Likelihood Estimation</strong> is one of the ways of estimating the parameters of a model. It attempts to find the parameters which maximize the likelihood function. Utilizing MLE for logistic regression is a common application.</p>
 
-<p>The figure below shows the barplot for the same</p>
+<p>However the interesting part is the fact that maximizing the likelihood is equivalent to minimizing <code>$$D_{KL}(P(x|\theta^*)||P(X|\theta))$$</code></p>
+
+<p>where <code>$P(.|\theta^*)$</code> is the true distribution and <code>$P(.|\theta)$</code> is our estimate of it. Let&rsquo;s see how</p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(x|\theta))=\sum_{x \in X} P(x|\theta^*) \ln \frac{P(x|\theta^*)}{P(x|\theta)}$$</code>
+<code>$$=\sum_{x \in X} P(x|\theta^*) \ln P(x|\theta^*) - P(x|\theta^*) \ln P(x|\theta)$$</code></p>
+
+<p>The first term is nothing but the entropy of <code>$P(x|\theta^*)$</code>
+<code>$$=\sum_{x \in X} -H[P(x|\theta^*)] - P(x|\theta^*) \ln P(x|\theta)$$</code></p>
+
+<p>Since the first term has nothing to do with the parameters represented by <code>$\theta$</code>, therefore we can drop it. Therefore</p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(X|\theta)) \propto - \sum_{x \in X}P(x|\theta^*) \ln P(x|\theta)$$</code></p>
+
+<p>Now if we draw N samples <code>$x ~ P(x|\theta^*)$</code></p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(X|\theta)) \propto - \sum_{x \in X} [\frac{1}{N}\sum_{i=1}^N \delta(x-x_i)]\ln P(x|\theta)$$</code></p>
+
+<p>By the law of large numbers as N approaches infinity, the above equation can be written as</p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(X|\theta)) \propto - \frac{1}{N}\sum_{i=1}^N \ln P(x_i|\theta)$$</code></p>
+
+<p>which is nothing but the log likelihood of the data. This is specially important as it shows us that maximizing the likelihood of data using our estimate is equivalent to minimizing the difference between the true distribution and our estimate. Hence even if the true distribution is unknown, MLE can be used as a tool to apply our estimate to the true distribution.</p>
+
+<p>Before we finish our discussion of KL divergence let&rsquo;s see a toy example. Assuming that we have a 6 sided weighted dice such that the true probabilities are given by <code>$$p=[0.1, 0.2, 0.2, 0.1, 0.25, 0.15]$$</code>. If we try to model it using a uniform distribution, our <code>$q$</code> becomes <code>$$q=[0.166, 0.166, 0.166, 0.166, 0.166, 0.166]$$</code>.</p>
+
+<p>The figure below shows the bar plot for the same</p>
 
 <p><img src="https://raw.githubusercontent.com/pfrcks/myblog/master/images/kl.png" alt="Image" /></p>
 
@@ -89,15 +115,11 @@ def kl_div(p, q):
 
 <p>This non symmetric nature of KL divergence as discussed above is one of the reasons it is not a distance metric.</p>
 
-<h2 id="distance-metrics-in-the-wild">Distance metrics in the wild</h2>
-
-<p>As expected Euclidean distance is perhaps the most used distance metric. We commonly utilize it for ML algorithms like KNN, K-Means, etc. Cosine distance is another heavily utilized metric used prominently in calculating similarity in NLP based tasks. But how does the choice of distance metric effect the model?</p>
-
-<h2 id="curse-of-dimensionality">Curse of Dimensionality</h2>
+<h2 id="ii-curse-of-dimensionality">II: Curse of Dimensionality</h2>
 
 <p>A typical supervised machine learning problem involves examples which are essentially vectors in a high dimensional feature space. A feature vector <code>$x=&lt;x_1, x_2, x_3, ..., x_d&gt;$</code>, can be said to be belonging to the space <code>$\mathbb{R}^D$</code></p>
 
-<p>Recall the concepts underlying K-Nearest Neighbors. We utilize the labels of the K neares points to make prediction about the label of the point under consideration. This is done because of our inductive bias that if a point lies in a space, then it is similar to other points which are in vicinity to it. Each dimension of the feature vector is taken into consdiration when the concept of <strong>nearest</strong> is being applied. However this introduces a couple of problems. Since KNN is giving importance to all features equally, in a dataset containing only a select relevant features KNN can perform poorly.</p>
+<p>Recall the concepts underlying K-Nearest Neighbors. We utilize the labels of the K nearest points to make prediction about the label of the point under consideration. This is done because of our inductive bias that if a point lies in a space, then it is similar to other points which are in vicinity to it. Each dimension of the feature vector is taken into consideration when the concept of <strong>nearest</strong> is being applied. However this introduces a couple of problems. Since KNN is giving importance to all features equally, in a dataset containing only a select relevant features KNN can perform poorly.</p>
 
 <p>Another problem which arises is of feature scaling. Let&rsquo;s assume that the distance metric for KNN is Euclidean distance. In such a case different scales amongst the dimensions of the feature vector can result in some dimensions being completely ignored. However, this has an easy fix. We can scale the dimensions to zero mean and unit variance and get rid of this issue.</p>
 
