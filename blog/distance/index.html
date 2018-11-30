@@ -63,7 +63,7 @@
 <p>If it is not a distance metric, then how is it used? In the formula presented above, the true distribution is often intractable. Therefore by minimizing the KL divergence by using tractable approximated distributions we can get an approximate distribution from which samples can be drawn.</p>
 
 <p>As a toy example let&rsquo;s take a 6 sided weighted die such that the true probabilities are given by <code>$p=[0.1, 0.2, 0.2, 0.1, 0.25, 0.15]$</code>. If we try to model it using a uniform distribution, our <code>$q$</code> becomes <code>$[0.166, 0.166, 0.166, 0.166, 0.166, 0.166]$</code>
-<img src="https://github.com/pfrcks/myblog/blob/master/images/kl.png" alt="Image" /></p>
+<img src="https://raw.githubusercontent.com/pfrcks/myblog/master/images/kl.png" alt="Image" /></p>
 
 <pre><code class="language-python">import numpy as np
 
