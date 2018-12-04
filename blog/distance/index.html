@@ -69,7 +69,7 @@
 <p>where <code>$P(.|\theta^*)$</code> is the true distribution and <code>$P(.|\theta)$</code> is our estimate of it. Let&rsquo;s see how</p>
 
 <p><code>$$D_{KL}(P(x|\theta^*)||P(x|\theta))=\sum_{x \in X} P(x|\theta^*) \ln \frac{P(x|\theta^*)}{P(x|\theta)}$$</code>
-<code>$$=\sum_{x \in X} P(x|\theta^*) \ln P(x|\theta^*) - P(x|\theta^*) \ln P(x|\theta)$$</code></p>
+<code>$$=\sum_{x \in X} [P(x|\theta^*) \ln P(x|\theta^*) - P(x|\theta^*) \ln P(x|\theta)]$$</code></p>
 
 <p>The first term is nothing but the entropy of <code>$P(x|\theta^*)$</code>
 <code>$$= -H[P(x|\theta^*)] - \sum_{x \in X} P(x|\theta^*) \ln P(x|\theta)$$</code></p>
