@@ -125,6 +125,21 @@ def kl_div(p, q):
 
 <p>However, the problem becomes much more severe when the number of dimensions start increasing.</p>
 
+<p>Extending from the analysis for KNN explained above, let us try to consider a nearest-neighbor estimate of a point at the origin on a p dimensional space. Consider that there are N points that are uniformly distributed in this p dimensional unit ball around the point at center. Given this situation, let us try to compute the median distance of the closest data point to the center.</p>
+
+<p>The volume in the space more that a distance <code>$kr$</code> from the center where <code>$r$</code> is the radius of the ball, is proportional to <code>$$\frac{r^{p} - (kr)^{p}}{r^{p}} = 1 - k^{p}$$</code>
+Probability that N points are away with a distance greater than <code>$kr$</code> is <code>$(1 - k^{p})^{N}$</code>. So, to get the median distance of nearest point from center, set this probability to 0.5
+<code>$$(1 - k^{p})^{N} = \frac{1}{2}$$</code>
+<code>$$\implies k = (1 - \frac{1}{2}^{\frac{1}{N}})^\frac{1}{p} $$</code></p>
+
+<p>This says that for a fixed number of data points, as the number of dimensions increase, the samples tend to aggregate near the boundary of the sample space which makes it difficult for the model to predict near the boundaries.</p>
+
+<p>This can be corroborated by the following experiment, where 1000 points of p dimensions are generated where on each dimension, the value is uniformly distributed between [0,1] and all of the dimensions are independent. The distribution of distances between the points look as follows.</p>
+
+<p><img src="https://raw.githubusercontent.com/pfrcks/myblog/master/images/Fig.png" alt="Image" /></p>
+
+<p>We can see that the distances have become more concentrated as p increases from what we expected above and gives us the idea that it becomes more and more difficult to cluster points based on mere distance. Even though real data wouldn&rsquo;t have independent and uniformly distributed dimensions, the probability that different points have similar distances is definitely higher.</p>
+
 </main>
 
   <footer>
