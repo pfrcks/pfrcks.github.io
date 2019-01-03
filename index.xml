@@ -23,6 +23,15 @@ For a function to be a distance function, it has to satisfy the following proper
     </item>
     
     <item>
+      <title></title>
+      <link>/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/</guid>
+      <description> Non Uniform Sampling for Faster Convergence of Neural Networks Clickbait Detection using Deep Learning Vehicle Detection using Point Cloud Data Word Sense Disambiguation using Graph Based Clustering  </description>
+    </item>
+    
+    <item>
       <title>About me</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -31,15 +40,6 @@ For a function to be a distance function, it has to satisfy the following proper
       <description>Hi, my name is Amol Agrawal and I am a Masters Student in the Computer Science department at the University of Massachusetts, Amherst.
 My current interests are:
  Machine Learning Reinforcement Learning Deep Learning Computational Social Science  You can tweet me or drop me an email</description>
-    </item>
-    
-    <item>
-      <title>About me</title>
-      <link>/projects/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/projects/</guid>
-      <description> Non Uniform Sampling for Faster Convergence of Neural Networks Clickbait Detection using Deep Learning Vehicle Detection using Point Cloud Data Word Sense Disambiguation using Graph Based Clustering  </description>
     </item>
     
   </channel>
