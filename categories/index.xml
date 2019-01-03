@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on lost in compilation</title>
+    <title>Categories on Lost in Compilation</title>
     <link>/categories/</link>
-    <description>Recent content in Categories on lost in compilation</description>
+    <description>Recent content in Categories on Lost in Compilation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
@@ -11,11 +11,11 @@
     
     
     <item>
-      <title>Machine learning</title>
-      <link>/categories/machine-learning/</link>
+      <title>Ml</title>
+      <link>/categories/ml/</link>
       <pubDate>Wed, 28 Nov 2018 13:52:38 -0500</pubDate>
       
-      <guid>/categories/machine-learning/</guid>
+      <guid>/categories/ml/</guid>
       <description></description>
     </item>
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on lost in compilation</title>
+    <title>Tags on Lost in Compilation</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on lost in compilation</description>
+    <description>Recent content in Tags on Lost in Compilation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Nov 2018 13:52:38 -0500</lastBuildDate>
@@ -12,11 +12,20 @@
     
     
     <item>
-      <title>Distance, ml, math</title>
-      <link>/tags/distance-ml-math/</link>
+      <title>Distance</title>
+      <link>/tags/distance/</link>
       <pubDate>Wed, 28 Nov 2018 13:52:38 -0500</pubDate>
       
-      <guid>/tags/distance-ml-math/</guid>
+      <guid>/tags/distance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kl divergence</title>
+      <link>/tags/kl-divergence/</link>
+      <pubDate>Wed, 28 Nov 2018 13:52:38 -0500</pubDate>
+      
+      <guid>/tags/kl-divergence/</guid>
       <description></description>
     </item>
     

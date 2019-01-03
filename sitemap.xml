@@ -17,7 +17,7 @@
   </url>
   
   <url>
-    <loc>/tags/distance-ml-math/</loc>
+    <loc>/tags/distance/</loc>
     <lastmod>2018-11-28T13:52:38-05:00</lastmod>
     <priority>0</priority>
   </url>
@@ -28,7 +28,13 @@
   </url>
   
   <url>
-    <loc>/categories/machine-learning/</loc>
+    <loc>/tags/kl-divergence/</loc>
+    <lastmod>2018-11-28T13:52:38-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/ml/</loc>
     <lastmod>2018-11-28T13:52:38-05:00</lastmod>
     <priority>0</priority>
   </url>
