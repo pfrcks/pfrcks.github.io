@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distance Metrics and Beyond | lost in compilation</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/nord.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/posts/">Posts</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Distance Metrics and Beyond</span></h1>
+
+<h2 class="date">2018/11/28</h2>
+</div>
+
+<main>
+
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>A distance function(also referred as a metric) in mathematics refers to the function that defines a distance between any two points of a set. The most prevalent example is the Euclidean distance. But let&rsquo;s first define what makes a function a distance function.</p>
+
+<p>For a function to be a distance function, it has to satisfy the following properties<code>$^{[1]}$</code>
+:</p>
+
+<ul>
+<li>Non-negativity : <code>$d(x, y) \geq 0$</code></li>
+<li>Identity       : <code>$d(x, y) = 0 \iff x=y$</code></li>
+<li>Symmetry       : <code>$d(x, y) = d(y, x)$</code></li>
+<li>Triangle Inequality : <code>$d(x, z) \leq d(x, y) + d(y, z)$</code></li>
+</ul>
+
+<p>Some of the distance functions which we went over in class were <code>$L_p$</code> distances, Jaccard Distance, Cosine Distance and Edit distance. Now let&rsquo;s take a look at one another kind of <em>distance</em> and then let&rsquo;s take a look at what happens to distances in high dimensional spaces.</p>
+
+<h2 id="i-kullback-leibler-divergence">I: Kullback–Leibler divergence</h2>
+
+<p>KL divergence is used to measure the difference between two probability distributions over the same random variable x.</p>
+
+<p><code>$$D_{KL}(p(x)||q(x)) = \sum_{x \in X} p(x) \ln \frac{p(x)}{q(x)}$$</code></p>
+
+<p>In terms of information theory, KL divergence measures the expected number of extra bits required to code samples from distribution <code>$p(x)$</code> when using code based on <code>$q(x)$</code>. Another way to think about this is that <code>$p(x)$</code> is the <strong>true</strong> distribution of data and <code>$q(x)$</code> is our <strong>approximation</strong> of it. <code>$^{[2]}$</code></p>
+
+<p>Even though it looks like KL divergence measures <strong>distance</strong> between two probability distributions, it is not a distance measure. KL divergence is neither symmetric not does it satisfy the triangle inequality. It is however non-negative.</p>
+
+<p>If it is not a distance metric, then how is it used? In the formula presented above, the true distribution is often intractable. Therefore by minimizing the KL divergence by using tractable approximated distributions we can get an approximate distribution from which samples can be drawn.</p>
+
+<p>Here&rsquo;s another interesting property. <strong>Maximum Likelihood Estimation</strong> is one of the ways of estimating the parameters of a model. It attempts to find the parameters which maximize the likelihood function. Utilizing MLE for logistic regression is a common application.</p>
+
+<p>However the interesting part is the fact that maximizing the likelihood is equivalent to minimizing <code>$$D_{KL}(P(x|\theta^*)||P(X|\theta))$$</code></p>
+
+<p>where <code>$P(.|\theta^*)$</code> is the true distribution and <code>$P(.|\theta)$</code> is our estimate of it. Let&rsquo;s see how</p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(x|\theta))=\sum_{x \in X} P(x|\theta^*) \ln \frac{P(x|\theta^*)}{P(x|\theta)}$$</code>
+<code>$$=\sum_{x \in X} [P(x|\theta^*) \ln P(x|\theta^*) - P(x|\theta^*) \ln P(x|\theta)]$$</code></p>
+
+<p>The first term is nothing but the entropy of <code>$P(x|\theta^*)$</code>
+<code>$$= -H[P(x|\theta^*)] - \sum_{x \in X} P(x|\theta^*) \ln P(x|\theta)$$</code></p>
+
+<p>Since the first term has nothing to do with the parameters represented by <code>$\theta$</code>, therefore we can drop it. Therefore</p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(X|\theta)) \propto - \sum_{x \in X}P(x|\theta^*) \ln P(x|\theta)$$</code></p>
+
+<p>Now if we draw N samples <code>$x ~ P(x|\theta^*)$</code></p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(X|\theta)) \propto - \sum_{x \in X} [\frac{1}{N}\sum_{i=1}^N \delta(x-x_i)]\ln P(x|\theta)$$</code></p>
+
+<p>By the law of large numbers as N approaches infinity, the above equation can be written as</p>
+
+<p><code>$$D_{KL}(P(x|\theta^*)||P(X|\theta)) \propto - \frac{1}{N}\sum_{i=1}^N \ln P(x_i|\theta)$$</code></p>
+
+<p>which is nothing but the log likelihood of the data. This is specially important as it shows us that maximizing the likelihood of data using our estimate is equivalent to minimizing the difference between the true distribution and our estimate. Hence even if the true distribution is unknown, MLE can be used as a tool to apply our estimate to the true distribution.</p>
+
+<p>Before we finish our discussion of KL divergence let&rsquo;s see a toy example. Assuming that we have a 6 sided weighted dice such that the true probabilities are given by <code>$$p=[0.1, 0.2, 0.2, 0.1, 0.25, 0.15]$$</code>. If we try to model it using a uniform distribution, our <code>$q$</code> becomes <code>$$q=[0.166, 0.166, 0.166, 0.166, 0.166, 0.166]$$</code>.</p>
+
+<p>The figure below shows the bar plot for the same</p>
+
+<p><img src="https://raw.githubusercontent.com/pfrcks/myblog/master/images/kl.png" alt="Image" /></p>
+
+<p>We can write a simple code snippet which can help us calculate the KL divergence between two distributions.(Disclaimer: For a much robust implementation refer to the scipy package)</p>
+
+<pre><code class="language-python">import numpy as np
+
+def kl_div(p, q):
+    p = np.asarray(p, dtype=np.float)
+    q = np.asarray(q, dtype=np.float)
+
+    return np.sum(np.where(p!=0, p*np.log(p/q), 0))
+</code></pre>
+
+<p>Using our toy example,</p>
+
+<pre><code class="language-python">&gt;&gt;print(kl_div(p, q))
+0.0603337190402897
+&gt;&gt;print(kl_div(q, p))
+0.055253998576011196
+</code></pre>
+
+<p>This non symmetric nature of KL divergence as discussed above is one of the reasons it is not a distance metric.</p>
+
+<h2 id="ii-curse-of-dimensionality">II: Curse of Dimensionality</h2>
+
+<p>A typical supervised machine learning problem involves examples which are essentially vectors in a high dimensional feature space. A feature vector <code>$x=&lt;x_1, x_2, x_3, ..., x_d&gt;$</code>, can be said to be belonging to the space <code>$\mathbb{R}^D$</code></p>
+
+<p>Recall the concepts underlying K-Nearest Neighbors. We utilize the labels of the K nearest points to make prediction about the label of the point under consideration. This is done because of our inductive bias that if a point lies in a space, then it is similar to other points which are in vicinity to it. Each dimension of the feature vector is taken into consideration when the concept of <strong>nearest</strong> is being applied. However this introduces a couple of problems. Since KNN is giving importance to all features equally, in a dataset containing only a select relevant features KNN can perform poorly.</p>
+
+<p>Another problem which arises is of feature scaling. Let&rsquo;s assume that the distance metric for KNN is Euclidean distance. In such a case different scales amongst the dimensions of the feature vector can result in some dimensions being completely ignored. However, this has an easy fix. We can scale the dimensions to zero mean and unit variance and get rid of this issue.</p>
+
+<p>However, the problem becomes much more severe when the number of dimensions start increasing.</p>
+
+<p>Extending from the analysis for KNN explained above, let us try to consider a nearest-neighbor estimate of a point at the origin on a p dimensional space. Consider that there are N points that are uniformly distributed in this p dimensional unit ball around the point at center. Given this situation, let us try to compute the median distance of the closest data point to the center.</p>
+
+<p>The volume in the space more than a distance <code>$kr$</code> from the center where <code>$r$</code> is the radius of the ball, is proportional to <code>$$\frac{r^{p} - (kr)^{p}}{r^{p}} = 1 - k^{p}$$</code>
+Probability that N points are at a distance greater than <code>$kr$</code> is <code>$(1 - k^{p})^{N}$</code> <code>$^{[3]}$</code>. So, to get the median distance of nearest point from center, set this probability to 0.5
+<code>$$(1 - k^{p})^{N} = \frac{1}{2}$$</code>
+<code>$$\implies k = (1 - \frac{1}{2}^{\frac{1}{N}})^\frac{1}{p} $$</code></p>
+
+<p>This says that for a fixed number of data points, as the number of dimensions increase, the samples tend to aggregate near the boundary of the sample space which makes it difficult for the model to predict near the boundaries.</p>
+
+<p>This can be corroborated by the following experiment, where 1000 points of p dimensions are generated where on each dimension, the value is uniformly distributed between [0,1] and all of the dimensions are independent. The distribution of distances between the points look as follows.</p>
+
+<p><img src="https://raw.githubusercontent.com/pfrcks/myblog/master/images/Fig.png" alt="Image" /></p>
+
+<p>We can see that the distances have become more concentrated as p increases from what we expected above and gives us the idea that it becomes more and more difficult to cluster points based on mere distance. Even though real data wouldn&rsquo;t have independent and uniformly distributed dimensions, the probability that different points have similar distances is definitely higher.</p>
+
+<h3 id="references">References</h3>
+
+<ol>
+<li><a href="https://www.cs.utah.edu/~jeffp/teaching/cs5955/L7-Distances.pdf">https://www.cs.utah.edu/~jeffp/teaching/cs5955/L7-Distances.pdf</a></li>
+<li><a href="http://hanj.cs.illinois.edu/cs412/bk3/KL-divergence.pdf">http://hanj.cs.illinois.edu/cs412/bk3/KL-divergence.pdf</a></li>
+<li><a href="https://web.stanford.edu/~hastie/ElemStatLearn/">https://web.stanford.edu/~hastie/ElemStatLearn/</a></li>
+</ol>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+
+  
+  <hr/>
+  &copy; <a href="https://linkedin.com/in/aagrawal92">Amol Agrawal</a> 2017 &ndash; 2018 | <a href="https://github.com/pfrcks">Github</a> | <a href="https://twitter.com/pfrcks">Twitter</a> | <a href="/index.xml">Subscribe</a>
+  
+  </footer>
+  </body>
+</html>
+
