@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Distance, ml, math on lost in compilation</title>
+    <link>/tags/distance-ml-math/</link>
+    <description>Recent content in Distance, ml, math on lost in compilation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Nov 2018 13:52:38 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/distance-ml-math/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Distance Metrics and Beyond</title>
+      <link>/posts/distance/</link>
+      <pubDate>Wed, 28 Nov 2018 13:52:38 -0500</pubDate>
+      
+      <guid>/posts/distance/</guid>
+      <description>Getting Started A distance function(also referred as a metric) in mathematics refers to the function that defines a distance between any two points of a set. The most prevalent example is the Euclidean distance. But let&amp;rsquo;s first define what makes a function a distance function.
+For a function to be a distance function, it has to satisfy the following properties$^{[1]}$ :
+ Non-negativity : $d(x, y) \geq 0$ Identity : $d(x, y) = 0 \iff x=y$ Symmetry : $d(x, y) = d(y, x)$ Triangle Inequality : $d(x, z) \leq d(x, y) + d(y, z)$  Some of the distance functions which we went over in class were $L_p$ distances, Jaccard Distance, Cosine Distance and Edit distance.</description>
+    </item>
+    
+  </channel>
+</rss>
